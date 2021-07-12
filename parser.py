@@ -57,7 +57,6 @@ def parse_biolink_yaml(yaml_file):
     documents = yaml.full_load(file)
     inverse_pair={}
     SEMMED_PRED_MAPPING={}
-    semmed_list=[]
     for item, doc in documents.items():
         if (item=='slots'):
 
@@ -89,7 +88,7 @@ def parse_biolink_yaml(yaml_file):
       if (found==0):
          SEMMED_PRED_MAPPING[semmed_type]={'self':check.replace(' ','_'),'reverse':check.replace(' ','_')}
     print("Finished!")
-    return semmed_list,SEMMED_PRED_MAPPING
+    return SEMMED_PRED_MAPPING
 
 def load_data(data_folder):
     def construct_rec(sub_umls, obj_umls, line, reverse=False):
@@ -126,7 +125,7 @@ def load_data(data_folder):
 
     nodes_path = os.path.join(data_folder, "nodes_neo4j.csv")
     edges_path = os.path.join(data_folder, "edges_neo4j.csv")
-    semmed_list,SEMMED_PRED_MAPPING=parse_biolink_yaml(os.path.join(data_folder, "biolink-model.yaml"))
+    SEMMED_PRED_MAPPING=parse_biolink_yaml(os.path.join(data_folder, "biolink-model.yaml"))
 
     group_by_semmantic_dict = defaultdict(list)
     id_type_mapping = {}

@@ -1,15 +1,16 @@
 
 {
     "version": "0.1",
-    "requires" : "biothings_client",
+    "requires" : "pyyaml",
     "__metadata__" : {
         "license_url" : "https://skr3.nlm.nih.gov/SemMedDB/",
         "licence" : "CC BY 4.0",
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["http://localhost:8081/dataupload/mysrc/nodes_neo4j.csv",
-                      "http://localhost:8081/dataupload/mysrc/edges_neo4j.csv"],
+        "data_url" : ["https://raw.githubusercontent.com/r76941156/SEMMED/main/nodes_neo4j.csv",
+                      "https://raw.githubusercontent.com/r76941156/SEMMED/main/edges_neo4j.csv",
+                      "https://raw.githubusercontent.com/biolink/biolink-model/master/biolink-model.yaml"],
         "uncompress" : false,
         "release" : "version:get_release"
     },
