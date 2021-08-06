@@ -9,6 +9,7 @@
     },
     "dumper" : {
         "data_url" : ["https://github.com/r76941156/SEMMED_APIs/raw/main/source_file.tar.gz",
+                      "https://raw.githubusercontent.com/r76941156/SEMMED_APIs/main/mapping.json",
                       "https://raw.githubusercontent.com/biolink/biolink-model/master/biolink-model.yaml"],
         "uncompress" : true,
         "release" : "version:get_release"
