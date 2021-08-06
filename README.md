@@ -1,2 +1,1 @@
-# SEMMED Phenotype
-API Parser
+# SEMMED Phenotype API Parser (Biolink V2)
