@@ -8,10 +8,9 @@
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["https://raw.githubusercontent.com/r76941156/SEMMED/main/nodes_neo4j.csv",
-                      "https://raw.githubusercontent.com/r76941156/SEMMED/main/edges_neo4j.csv",
+        "data_url" : ["https://github.com/r76941156/SEMMED_APIs/blob/main/source_file.tar.gz",
                       "https://raw.githubusercontent.com/biolink/biolink-model/master/biolink-model.yaml"],
-        "uncompress" : false,
+        "uncompress" : True,
         "release" : "version:get_release"
     },
     "uploader" : {
