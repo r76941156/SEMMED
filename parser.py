@@ -67,7 +67,8 @@ def parse_biolink_yaml(yaml_file):
 
 def load_data(data_folder):
 
-    with open('mapping.json') as fp:
+    mapping_file = os.path.join(data_folder, "mapping.json")
+    with open(mapping_file) as fp:
        SEMMED_SEMANTIC_TYPE_MAPPING=json.load(fp)
        
     def construct_rec(sub_umls, obj_umls, line, reverse=False):
