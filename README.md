@@ -1,2 +1,2 @@
-# SEMMED Disease
+# SEMMED Phenotype
 API Parser

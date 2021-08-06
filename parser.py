@@ -8,9 +8,6 @@ import json
 
 maxInt = sys.maxsize
 
-#DOC_TYPE = "Disease"
-#SEMMED_TYPE = "disease"
-
 DOC_TYPE = "PhenotypicFeature"
 SEMMED_TYPE = "phenotypicfeature"
 
@@ -83,7 +80,8 @@ def load_data(data_folder):
             }
         semmed_pred=line[0].lower()
         if not reverse:
-             pred = SEMMED_PRED_MAPPING[semmed_pred]['self']
+             pred = semmed_pred ###make sure other system users can access SEMMED data without conversion
+             #pred = SEMMED_PRED_MAPPING[semmed_pred]['self']
         else:
              pred = SEMMED_PRED_MAPPING[semmed_pred]['reverse']
       
