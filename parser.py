@@ -54,7 +54,7 @@ def parse_biolink_yaml(yaml_file):
        if (value.strip()==check):
           found=1
           SEMMED_PRED_MAPPING[semmed_type]={'self':check.replace(' ','_'),'reverse':key.replace(' ','_')}
-       elif (key.strip()==check): ###key check for part of only 07/2021
+       elif (key.strip()==check):
           found=1
           SEMMED_PRED_MAPPING[semmed_type]={'self':check.replace(' ','_'),'reverse':value.replace(' ','_')}
       if (found==0):
