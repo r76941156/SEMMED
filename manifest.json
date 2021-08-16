@@ -1,0 +1,19 @@
+
+{
+    "version": "0.1",
+    "requires" : "pyyaml",
+    "__metadata__" : {
+        "license_url" : "https://skr3.nlm.nih.gov/SemMedDB/",
+        "licence" : "CC BY 4.0",
+        "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
+    },
+    "dumper" : {
+        "data_url" : ["https://github.com/r76941156/SEMMED_APIs/raw/main/source_file.tar.gz"],
+        "uncompress" : true,
+        "release" : "version:get_release"
+    },
+    "uploader" : {
+        "parser" : "parser:load_data",
+        "on_duplicates" : "error"
+    }
+}
