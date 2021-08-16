@@ -8,7 +8,7 @@
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["https://localhost/source_file.tar.gz"],
+        "data_url" : ["https://github.com/n19810426/SEMMED_sources/blob/main/source_file.tar.gz?raw=true"],
         "uncompress" : true,
         "release" : "version:get_release"
     },
