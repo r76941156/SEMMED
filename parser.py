@@ -35,7 +35,7 @@ def load_data(data_folder):
         negation=line[4].lower()
         pmid_list=line[3].split(';')
         if (negation=='true'):
-         pmid_list=[x+",negation" for x in pmid_list]
+         pmid_list=[x+"(negation)" for x in pmid_list]
         pred = semmed_pred
       
         if pred not in rec_related[sub_umls]:
