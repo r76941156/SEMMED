@@ -20,19 +20,19 @@ def load_data(data_folder):
 
         rec_related[predication_id]={
   
-         '_id': "PREDICATION_ID:"+predication_id,
-         'association': {"edge_label":pred},
-         'object':{
-                   'id': obj_umls,
-                   'name': obj_name,
-                   'semantic_type': obj_semtype,
-                   "pmid": pmid
-                  },
-         'subject':{
+         "_id": "PREDICATION_ID:"+predication_id,
+         "association": {"edge_label":pred},
+         "subject":{
                     '_id': sub_umls,
                     'name': sub_name,
                    'semantic_type': sub_semtype
-                  }
+                  },   
+         "object":{
+                   'id': obj_umls,
+                   'name': obj_name,
+                   'semantic_type': obj_semtype
+                  },
+          "pmid": pmid
          }
         yield rec_related[predication_id]
         del rec_related[predication_id]
