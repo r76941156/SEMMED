@@ -25,7 +25,7 @@ def load_data(data_folder):
          "subject":{
                     '_id': sub_umls,
                     'name': sub_name,
-                   'semantic_type': sub_semtype
+                    'semantic_type': sub_semtype
                   },   
          "object":{
                    'id': obj_umls,
