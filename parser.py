@@ -16,21 +16,26 @@ def load_data(data_folder):
         obj_semtype=line[7]
         obj_name=line[6]
         pmid=line[8]
+        sub_novelty=line[9]
+        obj_novelty=line[10]
+
         pred=line[4].lower()
 
         rec_related[predication_id]={
   
          "_id": "PREDICATION_ID:"+predication_id,
-         "association": {"edge_label":pred},
+         "predicate": pred,
          "subject":{
-                    '_id': sub_umls,
-                    'name': sub_name,
-                    'semantic_type': sub_semtype
+                    "umls": sub_umls,
+                    "name": sub_name,
+                    "semantic_type": sub_semtype,
+                    "novelty": sub_novelty
                   },   
          "object":{
-                   'id': obj_umls,
-                   'name': obj_name,
-                   'semantic_type': obj_semtype
+                   "umls": obj_umls,
+                   "name": obj_name,
+                   "semantic_type": obj_semtype,
+                   "novelty": obj_novelty
                   },
           "pmid": pmid
          }
