@@ -1,4 +1,3 @@
-
 {
     "version": "0.1",
     "requires" : "pyyaml",
@@ -8,8 +7,8 @@
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["https://dl.dropboxusercontent.com/s/dw3y23vjo1dih4t/semmed_source.tar.gz"],
-        "uncompress" : true,
+        "data_url" : ["https://dl.dropboxusercontent.com/s/6wc8jd8sivu77l7/semmed_0821.csv"],
+        "uncompress" : false,
         "release" : "version:get_release"
     },
     "uploader" : {
