@@ -25,13 +25,13 @@ def load_data(data_folder):
         sub_novelty=line[7]
         obj_novelty=line[11]
         
-        #sub_semtype_name=None
-        #obj_semtype_name=None
-        #if (sub_semtype in type_label):
-         #sub_semtype_name=type_label[sub_semtype]
+        sub_semtype_name=None
+        obj_semtype_name=None
+        if (sub_semtype in type_label):
+         sub_semtype_name=type_label[sub_semtype]
        
-        #if (obj_semtype in type_label):
-         #obj_semtype_name=type_label[obj_semtype]
+        if (obj_semtype in type_label):
+         obj_semtype_name=type_label[obj_semtype]
        
         if ("C" not in sub_umls): ###one or more gene ids
            sub_umls=sub_umls.split("|") 
@@ -66,19 +66,19 @@ def load_data(data_folder):
                     "umls": sub_id,
                     "name": sub_name[sub_idx],
                     "semantic_type_abbreviation": sub_semtype,
-                    "semantic_type_name": type_label[sub_semtype],
+                    "semantic_type_name": sub_semtype_name,
                     "novelty": sub_novelty
                   },
             "object":{
                    "id": obj_id,
                    "name": obj_name[obj_idx],
                    "semantic_type_abbreviation": obj_semtype,
-                   "semantic_type_name": type_label[obj_semtype], 
+                   "semantic_type_name": obj_semtype_name, 
                    "novelty": obj_novelty
                   }
            }
-           if (not type_label[sub_semtype]): del rec_related[predication_id]["subject"]["semantic_type_name"]
-           if (not type_label[obj_semtype]): del rec_related[predication_id]["object"]["semantic_type_name"]     
+           if (not sub_semtype_name): del rec_related[predication_id]["subject"]["semantic_type_name"]
+           if (not obj_semtype_name): del rec_related[predication_id]["object"]["semantic_type_name"]     
 
     edges_path = os.path.join(data_folder, "semmed_test.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
