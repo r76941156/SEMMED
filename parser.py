@@ -77,7 +77,7 @@ def load_data(data_folder):
                    "novelty": obj_novelty
                   }
            }
-        yield rec_related[predication_id]
+       
 
     edges_path = os.path.join(data_folder, "semmed_test.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
@@ -99,5 +99,7 @@ def load_data(data_folder):
              print("Data Generation Progess:",str(count)+"/"+str(csv_total))
              construct_rec(_item)
              print("=====")
-           
         print("Data Generation is Done.")   
+        
+    for rec in rec_related.values():
+        yield rec    
