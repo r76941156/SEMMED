@@ -78,14 +78,13 @@ def load_data(data_folder):
            }
         yield rec_related[predication_id]
 
-    edges_path = os.path.join(data_folder, "semmed_0821.csv")
-   
+    edges_path = os.path.join(data_folder, "semmed_test.csv")
+    mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
 
     with open(edges_path) as f:
        csv_total=sum(1 for line in f)
 
-    names = pd.read_csv("https://metamap.nlm.nih.gov/Docs/SemanticTypes_2018AB.txt", sep="|",
-                   names=['abv', 'ID', 'label'])
+    names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
 
     rec_related = {}
@@ -95,10 +94,8 @@ def load_data(data_folder):
         count=0
         for _item in csv_reader:
              count+=1
-             if (count<=10000):
-                print("Data Generation Progess:",str(count)+"/"+str(csv_total))
-                construct_rec(_item)
-                print("=====")
-             else:
-                break
+             print("Data Generation Progess:",str(count)+"/"+str(csv_total))
+             construct_rec(_item)
+             print("=====")
+           
         print("Data Generation is Done.")   
