@@ -83,6 +83,7 @@ def load_data(data_folder):
     mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
 
     with open(edges_path) as f:
+       next(f) 
        csv_total=sum(2 for line in f)
 
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
