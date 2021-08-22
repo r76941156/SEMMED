@@ -77,7 +77,6 @@ def load_data(data_folder):
                   }
            }
         yield rec_related[predication_id]
-        del rec_related[predication_id]
 
     edges_path = os.path.join(data_folder, "semmed_0821.csv")
    
