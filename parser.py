@@ -80,7 +80,7 @@ def load_data(data_folder):
            if (not sub_semtype_name): del rec_related[predication_id]["subject"]["semantic_type_name"]
            if (not obj_semtype_name): del rec_related[predication_id]["object"]["semantic_type_name"]     
 
-    edges_path = os.path.join(data_folder, "semmed_test.csv")
+    edges_path = os.path.join(data_folder, "semmed_0821.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
 
     with open(edges_path) as f:
