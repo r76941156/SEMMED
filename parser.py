@@ -90,16 +90,19 @@ def load_data(data_folder):
     type_label = dict(zip(names.abv, names.label))
 
     rec_related = {}
+    count=0
     with open(edges_path) as f:
         csv_reader = csv.reader(f, delimiter=';')
         next(csv_reader)
-        count=0
         for _item in csv_reader:
              count+=1
-             print("Data Generation Progess:",str(count)+"/"+str(csv_total))
+             print("Data Preparation Progess:",str(count)+"/"+str(csv_total))
              construct_rec(_item)
              print("=====")
         print("Data Generation is Done.")   
+        count=0
         
     for rec in rec_related.values():
+        count+=1
+        print("Data Generation Progess:",str(count)+"/"+str(csv_total))
         yield rec    
