@@ -84,7 +84,7 @@ def load_data(data_folder):
 
     with open(edges_path) as f:
        next(f) 
-       csv_total=sum(2 for line in f)
+       csv_total=sum(1 for line in f)
 
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
