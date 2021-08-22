@@ -11,6 +11,7 @@ import json
 def load_data(data_folder):
     def construct_rec(line):
       if (line[1]!='35392205'):
+        print(line)
         sub_umls=line[4]
         obj_umls=line[8]
         predication_id=line[0]
@@ -82,7 +83,7 @@ def load_data(data_folder):
     mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
 
     with open(edges_path) as f:
-       csv_total=sum(1 for line in f)
+       csv_total=sum(2 for line in f)
 
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
