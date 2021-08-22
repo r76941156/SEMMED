@@ -7,10 +7,6 @@ import yaml
 import json
 
 
-names = pd.read_csv("https://metamap.nlm.nih.gov/Docs/SemanticTypes_2018AB.txt", sep="|",
-                   names=['abv', 'ID', 'label'])
-type_label = dict(zip(names.abv, names.label))
-
 
 def load_data(data_folder):
     def construct_rec(line):
@@ -89,6 +85,10 @@ def load_data(data_folder):
     with open(edges_path) as f:
        csv_total=sum(1 for line in f)
 
+    names = pd.read_csv("https://metamap.nlm.nih.gov/Docs/SemanticTypes_2018AB.txt", sep="|",
+                   names=['abv', 'ID', 'label'])
+    type_label = dict(zip(names.abv, names.label))
+
     rec_related = {}
     with open(edges_path) as f:
         csv_reader = csv.reader(f, delimiter=';')
@@ -100,4 +100,6 @@ def load_data(data_folder):
                 print("Data Generation Progess:",str(count)+"/"+str(csv_total))
                 construct_rec(_item)
                 print("=====")
+             else:
+                break
         print("Data Generation is Done.")   
