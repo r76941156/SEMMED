@@ -11,7 +11,6 @@ import json
 def load_data(data_folder):
     def construct_rec(line):
       if (line[1]!='35392205'):
-        print(line)
         sub_umls=line[4]
         obj_umls=line[8]
         predication_id=line[0]
@@ -24,6 +23,8 @@ def load_data(data_folder):
         pred=line[3]
         sub_novelty=line[7]
         obj_novelty=line[11]
+        sub_id_field="umls"
+        obj_id_field="umls"
         
         sub_semtype_name=None
         obj_semtype_name=None
@@ -36,6 +37,7 @@ def load_data(data_folder):
         if ("C" not in sub_umls): ###one or more gene ids
            sub_umls=sub_umls.split("|") 
            sub_name=sub_name.split("|")
+           sub_id_field="ncbigene" 
         else:
            if ('|' in sub_umls):
             sub_umls=[sub_umls.split("|")[0]]
@@ -46,7 +48,8 @@ def load_data(data_folder):
 
         if ("C" not in obj_umls): ###one or more gene ids
            obj_umls=obj_umls.split("|")
-           obj_name=obj_name.split("|") 
+           obj_name=obj_name.split("|")
+           obj_id_field="ncbigene"  
         else:
            if ('|' in obj_umls):
               obj_umls=[obj_umls.split("|")[0]]
@@ -63,14 +66,14 @@ def load_data(data_folder):
             "predicate": pred,
             "pmid": pmid,
             "subject":{
-                    "umls": sub_id,
+                    sub_id_field: sub_id,
                     "name": sub_name[sub_idx],
                     "semantic_type_abbreviation": sub_semtype,
                     "semantic_type_name": sub_semtype_name,
                     "novelty": sub_novelty
                   },
             "object":{
-                   "id": obj_id,
+                   obj_id_field: obj_id,
                    "name": obj_name[obj_idx],
                    "semantic_type_abbreviation": obj_semtype,
                    "semantic_type_name": obj_semtype_name, 
