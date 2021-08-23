@@ -7,7 +7,7 @@
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["https://dl.dropboxusercontent.com/s/6wc8jd8sivu77l7/semmed_0821.csv",
+        "data_url" : ["https://dl.dropboxusercontent.com/s/ue2wzkvqcrp60mx/semmed_small.csv",
                       "https://metamap.nlm.nih.gov/Docs/SemanticTypes_2018AB.txt"],
         "uncompress" : false,
         "release" : "version:get_release"

@@ -9,6 +9,7 @@ import json
 
 
 def load_data(data_folder):
+    rec_related={}
     def construct_rec(line):
       if (line[1]!='35392205'):
         sub_umls=line[4]
@@ -81,8 +82,9 @@ def load_data(data_folder):
            }
            if (not sub_semtype_name): del rec_related[predication_id]["subject"]["semantic_type_name"]
            if (not obj_semtype_name): del rec_related[predication_id]["object"]["semantic_type_name"]     
+           yield rec_related.values
 
-    edges_path = os.path.join(data_folder, "semmed_0821.csv")
+    edges_path = os.path.join(data_folder, "semmed_small.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2018AB.txt")
 
     with open(edges_path) as f:
@@ -92,7 +94,7 @@ def load_data(data_folder):
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
 
-    rec_related = {}
+    #rec_related = {}
     count=0
     with open(edges_path) as f:
         csv_reader = csv.reader(f, delimiter=';')
@@ -105,7 +107,7 @@ def load_data(data_folder):
         print("Data Generation is Done.")   
         count=0
         
-    for rec in rec_related.values():
-        count+=1
-        print("Data Generation Progess:",str(count)+"/"+str(csv_total))
-        yield rec    
+    #for rec in rec_related.values():
+    #    count+=1
+    #    print("Data Generation Progess:",str(count)+"/"+str(csv_total))
+    #    yield rec   
