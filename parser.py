@@ -14,7 +14,6 @@ def load_data(data_folder):
         sub_umls=line[4]
         obj_umls=line[8]
         predication_id=line[0]
-        print(predication_id)
         sub_semtype=line[6]
         sub_name=line[5]
         obj_semtype=line[10]
