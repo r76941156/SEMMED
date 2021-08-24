@@ -90,7 +90,7 @@ def load_data(data_folder):
            }
            if (not sub_semtype_name): del rec_dict["subject"]["semantic_type_name"]
            if (not obj_semtype_name): del rec_dict["object"]["semantic_type_name"]
-           yield rec_dict
+           return rec_dict
 
            #if id_value not in rec_related:
            # rec_related[id_value]=rec_dict
@@ -113,8 +113,9 @@ def load_data(data_folder):
         for _item in csv_reader:
              count+=1
              if (count>0):
-                print("Data Prep Progess:",str(count)+"/"+str(csv_total))
-                construct_rec(_item)
+                print("Data Generation Progess:",str(count)+"/"+str(csv_total))
+                rec=construct_rec(_item)
+                yield rec
                 print("=====")
-        print("Data Prep is Done.")   
+        print("Data Generation is Done.")   
 
