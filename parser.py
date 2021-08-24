@@ -96,7 +96,7 @@ def load_data(data_folder):
            # rec_related[id_value]=rec_dict
   
 
-    edges_path = os.path.join(data_folder, "semmed_0821.csv")
+    edges_path = os.path.join(data_folder, "semmed_small.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2013AA.txt")
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
