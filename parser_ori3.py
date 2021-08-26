@@ -3,22 +3,21 @@ import csv
 import os
 import sys
 import pandas as pd
+import yaml
 import json
 
 
 def load_data(data_folder):
-
     def construct_rec(line):
-      reg=re.compile('^[C0-9|\.]+$')
-
-      if(reg.match(line[8].strip())): ### skip some error records 
-        sub_umls=line[4].split("|")
-        obj_umls=line[8].split("|")
+      if (line[1]!='35392205'):
+        sub_umls=line[4]
+        obj_umls=line[8]
         predication_id=line[0]
+        print(predication_id)
         sub_semtype=line[6]
-        sub_name=line[5].split("|")
+        sub_name=line[5]
         obj_semtype=line[10]
-        obj_name=line[9].split("|")
+        obj_name=line[9]
         pmid=int(line[2])
         pred=line[3]
         sub_novelty=line[7]
@@ -28,38 +27,45 @@ def load_data(data_folder):
  
         sub_semtype_name=None
         obj_semtype_name=None
-
-        ###Find UMLS mapping
         if (sub_semtype in type_label):
          sub_semtype_name=type_label[sub_semtype]
        
         if (obj_semtype in type_label):
          obj_semtype_name=type_label[obj_semtype]
        
-        ### Define ID field name
-        if ("C" not in line[4]): ### one or more gene ids
+        if ("C" not in sub_umls): ###one or more gene ids
+           sub_umls=sub_umls.split("|") 
+           sub_name=sub_name.split("|")
            sub_id_field="ncbigene"         
         else:
            if ('|' in sub_umls):
-            sub_umls=[sub_umls[0]] ### take first CUI if it contains gene id(s)
-            sub_name=[sub_name[0]]
+            sub_umls=[sub_umls.split("|")[0]]
+            sub_name=[sub_name.split("|")[0]]
+           else:
+            sub_umls=[sub_umls]
+            sub_name=[sub_name]
 
-        if ("C" not in line[8]): ### one or more gene ids
+        if ("C" not in obj_umls): ###one or more gene ids
+           obj_umls=obj_umls.split("|")
+           obj_name=obj_name.split("|") 
            obj_id_field="ncbigene"
         else:
-           if ('|' in obj_umls): ### take first CUI if it contains gene id(s)
-              obj_umls=[obj_umls[0]]
-              obj_name=[obj_name[0]]
+           if ('|' in obj_umls):
+              obj_umls=[obj_umls.split("|")[0]]
+              obj_name=[obj_name.split("|")[0]]
+           else:
+              obj_umls=[obj_umls]
+              obj_name=[obj_name]
 
-        id_count=0 ### loop to get all id combinations if one record has multiple ids
+        id_count=0
         for sub_idx,sub_id in enumerate(sub_umls):
          for obj_idx,obj_id in enumerate(obj_umls):
-
            id_count+=1
+
            if (len(sub_umls)==1): 
               id_value=predication_id 
            else: 
-              id_value=predication_id+"_"+str(id_count) ### add sequence id
+              id_value=predication_id+"_"+str(id_count)
 
 
            rec_dict={
@@ -82,37 +88,34 @@ def load_data(data_folder):
                    "novelty": obj_novelty
                   }
            }
-
-           ### del semtype_name field if we did not any mappings since SEMMED used older UMLS mappin
            if (not sub_semtype_name): del rec_dict["subject"]["semantic_type_name"]
            if (not obj_semtype_name): del rec_dict["object"]["semantic_type_name"]
-
-           return rec_dict ###for test only
+           return rec_dict
 
            #if id_value not in rec_related:
-            #rec_related[id_value]=rec_dict
+           # rec_related[id_value]=rec_dict
   
 
-    edges_path = os.path.join(data_folder, "semmed_0821.csv")
+    edges_path = os.path.join(data_folder, "semmed_small.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2013AA.txt")
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
 
-    with open(edges_path) as f: ### get total record count
+    with open(edges_path) as f:
        next(f)
        csv_total=sum(1 for line in f)
 
     rec_related = {}
-    with open(edges_path) as f: ### data prep
+    with open(edges_path) as f:
         csv_reader = csv.reader(f, delimiter=';')
         next(csv_reader)
         count=0
         for _item in csv_reader:
              count+=1
              if (count>0):
-                print("Data Prep Progess:",str(count)+"/"+str(csv_total))
-                record=construct_rec(_item)
-                yield record
+                print("Data Generation Progess:",str(count)+"/"+str(csv_total))
+                rec=construct_rec(_item)
+                yield rec
                 print("=====")
-        print("Data Prep is Done.")
-   
+        print("Data Generation is Done.")   
+
