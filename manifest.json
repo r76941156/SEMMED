@@ -7,8 +7,7 @@
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["http://localhost/semmed_small.csv",
-                      "https://metamap.nlm.nih.gov/Docs/SemanticTypes_2013AA.txt"],
+        "data_url" : ["https://metamap.nlm.nih.gov/Docs/SemanticTypes_2013AA.txt"],
         "uncompress" : false,
         "release" : "version:get_release"
     },
