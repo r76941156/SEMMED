@@ -7,9 +7,9 @@
         "url" : "https://skr3.nlm.nih.gov/SemMedDB/"
     },
     "dumper" : {
-        "data_url" : ["https://dl.dropboxusercontent.com/s/ue2wzkvqcrp60mx/semmed_small.csv",
+        "data_url" : ["https://dl.dropboxusercontent.com/s/im2ru5epalfr9lt/semmed_source.tar.gz",
                       "https://metamap.nlm.nih.gov/Docs/SemanticTypes_2013AA.txt"],
-        "uncompress" : false,
+        "uncompress" : true,
         "release" : "version:get_release"
     },
     "uploader" : {
@@ -17,4 +17,3 @@
         "on_duplicates" : "error"
     }
 }
-
