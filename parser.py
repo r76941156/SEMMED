@@ -111,7 +111,8 @@ def load_data(data_folder):
              count+=1
              print("Data Generation Progess:",str(count)+"/"+str(csv_total))
              records=construct_rec(_item)
-             for record in records:
+             if(records):   
+              for record in records:
                 yield record
              print("=====")
         print("Data Generation is Done.")
