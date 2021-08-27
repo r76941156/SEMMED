@@ -41,17 +41,17 @@ def load_data(data_folder):
         if ("C" not in line[4]): ### one or more gene ids
            sub_id_field="ncbigene"         
         else:
-           if ('|' in sub_umls):
+           if ('|' in line[4]):
             sub_umls=[sub_umls[0]] ### take first CUI if it contains gene id(s)
             sub_name=[sub_name[0]]
 
         if ("C" not in line[8]): ### one or more gene ids
            obj_id_field="ncbigene"
         else:
-           if ('|' in obj_umls): ### take first CUI if it contains gene id(s)
+           if ('|' in line[8]): ### take first CUI if it contains gene id(s)
               obj_umls=[obj_umls[0]]
               obj_name=[obj_name[0]]
-        
+
         rec_dict_list=[]
         id_count=0 ### loop to get all id combinations if one record has multiple ids
         for sub_idx,sub_id in enumerate(sub_umls):
@@ -93,7 +93,7 @@ def load_data(data_folder):
         return rec_dict_list
   
 
-    edges_path = os.path.join(data_folder, "semmed_0821.csv")
+    edges_path = os.path.join(data_folder, "semmed_small.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2013AA.txt")
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
@@ -115,4 +115,6 @@ def load_data(data_folder):
                 yield record
              print("=====")
         print("Data Generation is Done.")
-   
+
+
+
