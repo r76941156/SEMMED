@@ -22,8 +22,8 @@ def load_data(data_folder):
         obj_name=line[9].split("|")
         pmid=int(line[2])
         pred=line[3]
-        sub_novelty=line[7]
-        obj_novelty=line[11]
+        sub_novelty=int(line[7])
+        obj_novelty=int(line[11])
         sub_id_field="umls"
         obj_id_field="umls"
  
@@ -58,7 +58,7 @@ def load_data(data_folder):
          for obj_idx,obj_id in enumerate(obj_umls):
 
            id_count+=1
-           if (len(sub_umls)==1 and len(obj_umls)==1): 
+           if (len(sub_umls)==1): 
               id_value=predication_id 
            else: 
               id_value=predication_id+"_"+str(id_count) ### add sequence id
@@ -93,7 +93,7 @@ def load_data(data_folder):
         return rec_dict_list
   
 
-    edges_path = os.path.join(data_folder, "semmed_small.csv")
+    edges_path = os.path.join(data_folder, "semmed_0821.csv")
     mapping_path = os.path.join(data_folder, "SemanticTypes_2013AA.txt")
     names = pd.read_csv(mapping_path, sep="|",names=['abv', 'ID', 'label'])
     type_label = dict(zip(names.abv, names.label))
@@ -115,3 +115,4 @@ def load_data(data_folder):
                 yield record
              print("=====")
         print("Data Generation is Done.")
+   
