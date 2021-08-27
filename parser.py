@@ -58,7 +58,7 @@ def load_data(data_folder):
          for obj_idx,obj_id in enumerate(obj_umls):
 
            id_count+=1
-           if (len(sub_umls)==1): 
+           if (len(sub_umls)==1 and len(obj_umls)==1): 
               id_value=predication_id 
            else: 
               id_value=predication_id+"_"+str(id_count) ### add sequence id
