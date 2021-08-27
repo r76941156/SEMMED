@@ -85,7 +85,7 @@ def load_data(data_folder):
                   }
            }
 
-           ### del semtype_name field if we did not any mappings since SEMMED used older UMLS mappin
+           ### del semtype_name field if we did not any mappings
            if (not sub_semtype_name): del rec_dict["subject"]["semantic_type_name"]
            if (not obj_semtype_name): del rec_dict["object"]["semantic_type_name"]
            rec_dict_list.append(rec_dict)
