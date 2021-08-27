@@ -4,14 +4,15 @@ import os
 import sys
 import pandas as pd
 import json
-
+import re
 
 def load_data(data_folder):
 
     def construct_rec(line):
-      reg=re.compile('^[C0-9|\.]+$')
 
-      if(reg.match(line[8].strip())): ### skip some error records 
+      reg=re.compile('^[C0-9|\.]+$') ### CUI format check
+
+      if(reg.match(line[8].strip())): ### skip some error records (e.g., predication id:80264847,123980473). 
         sub_umls=line[4].split("|")
         obj_umls=line[8].split("|")
         predication_id=line[0]
@@ -50,7 +51,8 @@ def load_data(data_folder):
            if ('|' in obj_umls): ### take first CUI if it contains gene id(s)
               obj_umls=[obj_umls[0]]
               obj_name=[obj_name[0]]
-
+        
+        rec_dict_list=[]
         id_count=0 ### loop to get all id combinations if one record has multiple ids
         for sub_idx,sub_id in enumerate(sub_umls):
          for obj_idx,obj_id in enumerate(obj_umls):
@@ -86,11 +88,9 @@ def load_data(data_folder):
            ### del semtype_name field if we did not any mappings since SEMMED used older UMLS mappin
            if (not sub_semtype_name): del rec_dict["subject"]["semantic_type_name"]
            if (not obj_semtype_name): del rec_dict["object"]["semantic_type_name"]
+           rec_dict_list.append(rec_dict)
 
-           return rec_dict ###for test only
-
-           #if id_value not in rec_related:
-            #rec_related[id_value]=rec_dict
+        return rec_dict_list
   
 
     edges_path = os.path.join(data_folder, "semmed_0821.csv")
@@ -102,17 +102,17 @@ def load_data(data_folder):
        next(f)
        csv_total=sum(1 for line in f)
 
-    rec_related = {}
+    
     with open(edges_path) as f: ### data prep
         csv_reader = csv.reader(f, delimiter=';')
         next(csv_reader)
         count=0
         for _item in csv_reader:
              count+=1
-             if (count>0):
-                print("Data Prep Progess:",str(count)+"/"+str(csv_total))
-                record=construct_rec(_item)
+             print("Data Generation Progess:",str(count)+"/"+str(csv_total))
+             records=construct_rec(_item)
+             for record in records:
                 yield record
-                print("=====")
-        print("Data Prep is Done.")
+             print("=====")
+        print("Data Generation is Done.")
    
